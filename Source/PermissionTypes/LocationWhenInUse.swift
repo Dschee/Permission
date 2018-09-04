@@ -22,7 +22,7 @@
 // SOFTWARE.
 //
 
-#if PERMISSION_LOCATION
+#if PERMISSION_LOCATION_WHEN_IN_USE
 import CoreLocation
 
 internal extension Permission {

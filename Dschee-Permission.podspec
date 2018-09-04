@@ -46,8 +46,18 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Location' do |lo|
+    lo.dependency 'Dschee-Permission/LocationAlways'
+    lo.dependency 'Dschee-Permission/LocationWhenInUse'
+  end
+
+  s.subspec 'LocationAlways' do |lo|
     lo.dependency 'Dschee-Permission/Core'
-    lo.pod_target_xcconfig = { "SWIFT_ACTIVE_COMPILATION_CONDITIONS" => "PERMISSION_LOCATION" }
+    lo.pod_target_xcconfig = { "SWIFT_ACTIVE_COMPILATION_CONDITIONS" => "PERMISSION_LOCATION_ALWAYS" }
+  end
+
+  s.subspec 'LocationWhenInUse' do |lo|  
+    lo.dependency 'Dschee-Permission/Core'
+    lo.pod_target_xcconfig = { "SWIFT_ACTIVE_COMPILATION_CONDITIONS" => "PERMISSION_LOCATION_WHEN_IN_USE" }
   end
 
   s.subspec 'Microphone' do |mi|

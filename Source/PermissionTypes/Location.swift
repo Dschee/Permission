@@ -22,7 +22,7 @@
 // SOFTWARE.
 //
 
-#if PERMISSION_LOCATION
+#if PERMISSION_LOCATION_ALWAYS || PERMISSION_LOCATION_WHEN_IN_USE
 import CoreLocation
 
 internal let LocationManager = CLLocationManager()
@@ -52,15 +52,19 @@ extension CLLocationManager {
         
         requestedLocation = true
         
+        #if PERMISSION_LOCATION_ALWAYS
         if case .locationAlways = permission.type {
             requestAlwaysAuthorization()
             return
         }
+        #endif
         
+        #if PERMISSION_LOCATION_WHEN_IN_USE
         if case .locationWhenInUse = permission.type {
             requestWhenInUseAuthorization()
             return
         }
+        #endif
     }
 }
 #endif

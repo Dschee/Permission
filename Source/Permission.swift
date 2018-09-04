@@ -39,10 +39,12 @@ open class Permission: NSObject {
     open static let addressBook = Permission(type: .addressBook)
     #endif
     
-    #if PERMISSION_LOCATION
+    #if PERMISSION_LOCATION_ALWAYS
     /// The permission to access the user's location when the app is in background.
     open static let locationAlways = Permission(type: .locationAlways)
+    #endif
     
+    #if PERMISSION_LOCATION_WHEN_IN_USE
     /// The permission to access the user's location when the app is in use.
     open static let locationWhenInUse = Permission(type: .locationWhenInUse)
     #endif
@@ -167,8 +169,11 @@ open class Permission: NSObject {
         if case .addressBook = type { return statusAddressBook }
         #endif
         
-        #if PERMISSION_LOCATION
+        #if PERMISSION_LOCATION_ALWAYS
         if case .locationAlways    = type { return statusLocationAlways }
+        #endif
+        
+        #if PERMISSION_LOCATION_WHEN_IN_USE
         if case .locationWhenInUse = type { return statusLocationWhenInUse }
         #endif
         
@@ -299,12 +304,14 @@ open class Permission: NSObject {
         }
         #endif
         
-        #if PERMISSION_LOCATION
+        #if PERMISSION_LOCATION_ALWAYS
         if case .locationAlways = type {
             requestLocationAlways(callback)
             return
         }
+        #endif
         
+        #if PERMISSION_LOCATION_WHEN_IN_USE
         if case .locationWhenInUse = type {
             requestLocationWhenInUse(callback)
             return
